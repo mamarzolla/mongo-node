@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 config(); // Load .env file e mette la connessione aq DB in una variabile d'ambiente ci sarebbe da aggiungere anche l'API key nello stesso file
 import * as driver from './driver'
+import * as mongooseOrm from './orm';
 
 console.log(process.env.MONGO_ATLAS_CONNECTION_STRING);/// si usa il process.env.nomedellaVariabile per accedere alle variabili contenue nel file .env
 
@@ -13,4 +14,9 @@ const mainDriver = async () => {
   console.log(await driver.getProdotti()) ;
 }
 
-mainDriver();
+//mainDriver();
+
+const mainOrm = async () => {
+    console.log(await mongooseOrm.insertCategoria('bambole', "giochi per bambino", "bambole di plastica")); 
+}
+mainOrm();

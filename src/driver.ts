@@ -106,3 +106,4 @@ export const getProdottiConoSenzaCriterioRicerca = async (prezzoMaggioreDi : num
     }finally{
         await client.close(); //  meglio chiuderla con il finally in quanto in fondo a tutte le istruzioni 
 }}
+
