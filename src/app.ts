@@ -17,6 +17,7 @@ const mainDriver = async () => {
 //mainDriver();
 
 const mainOrm = async () => {
-    console.log(await mongooseOrm.insertCategoria('bambole', "giochi per bambino", "bambole di plastica")); 
+   // console.log(await mongooseOrm.insertCategoria('bambole', "giochi per bambino", "bambole di plastica")); 
+    console.log(await mongooseOrm.getCategoria());
 }
 mainOrm();

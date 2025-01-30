@@ -19,3 +19,56 @@ export const insertCategoria = async (titolo: string, sottotitolo: string, descr
         await mongoose.disconnect(); // chiudiamo la connessione    
     }
 }
+
+export const getCategoria = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_ATLAS_CONNECTION_STRING!,{dbName:"amazon"}); // connessione al db e definiamo giò il nome del DB da utilizzare
+        return await Categoria.find(); // ritorniamo l'oggetto categoria
+    } catch (error) {
+        console.log(error);
+    }finally{
+        await mongoose.disconnect(); // chiudiamo la connessione    
+    }
+}
+
+export const getCategoriaID = async (id:string) => {
+    try {
+        await mongoose.connect(process.env.MONGO_ATLAS_CONNECTION_STRING!,{dbName:"amazon"}); // connessione al db e definiamo giò il nome del DB da utilizzare
+        return await Categoria.findById(id); // ritorniamo l'oggetto categoria relativo all'id
+    } catch (error) {
+        console.log(error);
+    }finally{
+        await mongoose.disconnect(); // chiudiamo la connessione    
+    }
+}
+
+
+export const deleteCategoriaID = async (id:string) => {
+    try {
+        await mongoose.connect(process.env.MONGO_ATLAS_CONNECTION_STRING!,{dbName:"amazon"}); // connessione al db e definiamo giò il nome del DB da utilizzare
+        return await Categoria.findByIdAndDelete(id); // eliminiamo l'oggetto categoria relativo all'id
+    } catch (error) {
+        console.log(error);
+    }finally{
+        await mongoose.disconnect(); // chiudiamo la connessione    
+    }
+}
+
+
+export const AttivaDisattivaCategoriaID = async (id:string,attiva:boolean) => {
+    try {
+        await mongoose.connect(process.env.MONGO_ATLAS_CONNECTION_STRING!,{dbName:"amazon"}); // connessione al db e definiamo giò il nome del DB da utilizzare
+        let cat =  await Categoria.findById(id); // recuperiamo l'oggetto categoria
+        if (!cat ) {
+            throw new Error("categoria non trovata");
+        }else{
+            cat.attiva = attiva; // assegnamo il valore
+        }
+        
+        return await cat?.save(); // ritorniamo l'oggetto categoria relativo all'id
+    } catch (error) {
+        console.log(error);
+    }finally{
+        await mongoose.disconnect(); // chiudiamo la connessione    
+    }
+}
